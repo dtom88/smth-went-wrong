@@ -59,11 +59,11 @@ public class ChildService {
 
     private List<Child> updateChildren(List<Child> children, State state, List<Child> updated) {
         children.forEach(s -> {
-            if (s.state == state) {
+            if (s.state != state) {
                 updated.add(s);
+                s.state = state;
+                childRepository.save(s);
             }
-            s.state = state;
-            childRepository.save(s);
         });
 
         return updated;
